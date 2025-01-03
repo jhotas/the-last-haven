@@ -13,9 +13,9 @@ export default function HomePage() {
             Iniciar
           </button>
         </Link>
-        <Link href="/rankings">
+        <Link href="/conquistas">
           <button className="btn">
-            Rankings
+            Conquistas
           </button>
         </Link>
       </div>
