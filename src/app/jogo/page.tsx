@@ -12,10 +12,17 @@ type Efeitos = {
   populacao: number;
 };
 
+type Atributos = {
+  energia: number;
+  materiais: number;
+  fome: number;
+  populacao: number;
+};
+
 type Conquista = {
   nome: string;
   descricao: string;
-  condicao: (atributos: typeof atributos) => boolean;
+  condicao: (atributos: Atributos) => boolean;
 };
 
 export default function Jogo() {
@@ -55,12 +62,12 @@ export default function Jogo() {
     {
       nome: "Olho Gordo",
       descricao: "Atingir 100 de comida.",
-      condicao: (atributos) => atributos.comida >= 100,
+      condicao: (atributos) => atributos.fome >= 100,
     },
     {
       nome: "Só Um Pedacinho?",
       descricao: "Atingir 0 de comida.",
-      condicao: (atributos) => atributos.comida <= 0,
+      condicao: (atributos) => atributos.fome <= 0,
     },
     {
       nome: "Últimos Recursos",
@@ -92,13 +99,13 @@ export default function Jogo() {
     },
     {
       nome: "Parado, É Um Assalto",
-      descricao: "Atingir 100 de recursos.",
-      condicao: (atributos) => atributos.recursos >= 100,
+      descricao: "Atingir 100 de materiais.",
+      condicao: (atributos) => atributos.materiais >= 100,
     },
     {
       nome: "Drake, Cadê A Porta?",
-      descricao: "Atingir 0 de recursos.",
-      condicao: (atributos) => atributos.recursos <= 0,
+      descricao: "Atingir 0 de materiais.",
+      condicao: (atributos) => atributos.materiais <= 0,
     },
   ];
 
