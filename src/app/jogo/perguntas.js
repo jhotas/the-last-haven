@@ -107,7 +107,7 @@ export const perguntas = [
       direita: {
         texto: "Ignorar e esperar pela chuva",
         efeitos: {
-          fome: +15,
+          energia: +15,
           populacao: -3,
         },
       },

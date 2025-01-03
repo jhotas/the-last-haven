@@ -27,14 +27,14 @@ type Conquista = {
 
 export default function Jogo() {
   const [question, setQuestion] = useState("");
-  const [atributos, setAtributos] = useState({
+  const [atributos, setAtributos] = useState<Atributos>({
     energia: 50,
     materiais: 50,
     fome: 50,
     populacao: 50,
   });
 
-  const [atributosAlterados, setAtributosAlterados] = useState<string[]>([]); // Agora é um array de atributos alterados
+  const [atributosAlterados, setAtributosAlterados] = useState<string[]>([]);
   const [personagemIndex, setPersonagemIndex] = useState<number>(1);
   const [gameOver, setGameOver] = useState<string | null>(null);
   const [conquistas, setConquistas] = useState<string[]>([]);
@@ -215,13 +215,13 @@ export default function Jogo() {
     if (gameOver) return; // Evita interações após derrota
     const perguntaAtual = perguntas.find((p) => p.pergunta === question);
     if (perguntaAtual) {
-      const efeitosDireita: Efeitos = {
+      const efeitosEsquerda: Efeitos = {
         energia: perguntaAtual.escolhas.direita.efeitos.energia ?? 0,
         materiais: perguntaAtual.escolhas.direita.efeitos.materiais ?? 0,
         fome: perguntaAtual.escolhas.direita.efeitos.fome ?? 0,
         populacao: perguntaAtual.escolhas.direita.efeitos.populacao ?? 0,
       };
-      aplicarEfeitos(efeitosDireita);
+      aplicarEfeitos(efeitosEsquerda);
       escolherPerguntaAleatoria(); // Escolhe uma nova pergunta aleatória
       setPersonagemIndex(Math.floor(Math.random() * 7) + 1); // Atualiza o personagem
     }
@@ -272,9 +272,12 @@ export default function Jogo() {
             <button
               onClick={handleLeftClick}
               onMouseEnter={() =>
-                setHoveredAtributo(
-                  perguntaAtual?.escolhas.esquerda.efeitos ?? { energia: 0, materiais: 0, fome: 0, populacao: 0 }
-                )
+                setHoveredAtributo({
+                  energia: perguntaAtual?.escolhas.esquerda.efeitos?.energia ?? 0,
+                  materiais: perguntaAtual?.escolhas.esquerda.efeitos?.materiais ?? 0,
+                  fome: perguntaAtual?.escolhas.esquerda.efeitos?.fome ?? 0,
+                  populacao: perguntaAtual?.escolhas.esquerda.efeitos?.populacao ?? 0,
+                })
               }
               onMouseLeave={() => setAtributosAlterados([])} // Limpa todos os atributos alterados
               className="px-6 py-3 bg-green-500 hover:bg-green-400 font-semibold rounded-lg shadow-md transition"
@@ -284,9 +287,12 @@ export default function Jogo() {
             <button
               onClick={handleRightClick}
               onMouseEnter={() =>
-                setHoveredAtributo(
-                  perguntaAtual?.escolhas.direita.efeitos ?? { energia: 0, materiais: 0, fome: 0, populacao: 0 }
-                )
+                setHoveredAtributo({
+                  energia: perguntaAtual?.escolhas.direita.efeitos?.energia ?? 0,
+                  materiais: perguntaAtual?.escolhas.direita.efeitos?.materiais ?? 0,
+                  fome: perguntaAtual?.escolhas.direita.efeitos?.fome ?? 0,
+                  populacao: perguntaAtual?.escolhas.direita.efeitos?.populacao ?? 0,
+                })
               }
               onMouseLeave={() => setAtributosAlterados([])} // Limpa todos os atributos alterados
               className="px-6 py-3 bg-red-500 hover:bg-red-400 font-semibold rounded-lg shadow-md transition"
