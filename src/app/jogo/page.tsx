@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import { ArchiveBoxIcon, ArrowLeftIcon, BoltIcon, CheckIcon, FireIcon, NoSymbolIcon, UserGroupIcon } from "@heroicons/react/16/solid";
-import { perguntas } from "./perguntas"; // Importe o arquivo de perguntas
+import { perguntas } from "./perguntas";
 import Link from "next/link";
 
 // Definindo o tipo para os efeitos, garantindo que todos os atributos estejam presentes
